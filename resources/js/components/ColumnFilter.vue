@@ -11,9 +11,9 @@
                     v-model="column">
                 <option value="">&mdash;</option>
                 <option
-                        v-for="(value, key) in this.getOption('columns')"
-                        :value="key"
-                        v-html="value"
+                        v-for="option in this.getOption('columns')"
+                        :value="option.value"
+                        v-html="option.label"
                 >
                 </option>
             </select>
@@ -28,9 +28,9 @@
                         selected
                 >&mdash;</option>
                 <option
-                        v-for="(value, key) in this.getOption('operators')"
-                        :value="key"
-                        v-html="value"
+                        v-for="option in this.getOption('operators')"
+                        :value="option.value"
+                        v-html="option.label"
                 >
 
                 </option>
@@ -49,6 +49,8 @@
 
 
 <script>
+
+    import _ from "lodash";
 
     export default {
         props: {
@@ -93,18 +95,17 @@
                 this.shouldRaise && this.$emit('change');
             },
 
-            getOption(name){
-                let key = _.findKey(this.options, (o) => o.name === name)
+            getOption(name) {
+              let items =this.options.filter((item) =>  item.label === name)[0];
 
-                if(key)
-                    return this.options[key].value;
-                
-                let obj = _.find(this.options, (o) => o.value === name)
+              let result = [];
 
-                if(obj)
-                    return _.omit(obj, 'value');
-
-                return null;
+              Object.keys(items).forEach((i) => {
+                if (i === 'label') return;
+                 result.push({ label: items[i], value: i});
+              });
+              
+              return result;
             }
         },
         computed: {

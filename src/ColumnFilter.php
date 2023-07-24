@@ -2,14 +2,14 @@
 
 namespace philperusse\Filters;
 
-use Illuminate\Http\Request;
 use Laravel\Nova\Filters\Filter;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ColumnFilter extends Filter
 {
     public $component = 'column-filter-selector';
 
-    public function apply(Request $request, $query, $value)
+    public function apply(NovaRequest $request, $query, $value)
     {
         $args = collect($value)->values()->filter();
         return $args->count() !== 3 ?
@@ -20,7 +20,7 @@ class ColumnFilter extends Filter
     public function columns()
     {
         return [
-            //bud l
+            //
         ];
     }
 
@@ -35,7 +35,7 @@ class ColumnFilter extends Filter
         ];
     }
     
-    public function options( Request $request )
+    public function options(NovaRequest $request)
     {
         return [
             'columns' => $this->columns(),
