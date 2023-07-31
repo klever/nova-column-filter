@@ -6,7 +6,7 @@
         <div class="flex p-2">
             <select
                     :dusk="filter.name + '-column-filter-select'"
-                    class="block w-full form-control-sm form-select mr-2"
+                    class="block w-full form-control-sm form-select mr-2 form-input-bordered"
                     @change="handleChange"
                     v-model="column">
                 <option value="">&mdash;</option>
@@ -19,7 +19,7 @@
             </select>
             <select
                     :dusk="filter.name + '-operator-filter-select'"
-                    class="block w-full form-control-sm form-select mr-2"
+                    class="block w-full form-control-sm form-select mr-2 form-input-bordered"
                     v-model="operator"
                     @change="handleChange"
             >
